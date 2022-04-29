@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hedaozi.DataCollector.WPF", "Hedaozi.DataCollector.WPF\Hedaozi.DataCollector.WPF.csproj", "{973D79F0-819E-411B-A87B-CB15FEF885FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hedaozi.DataCollector", "Hedaozi.DataCollector\Hedaozi.DataCollector.csproj", "{C4CAC161-1D1E-4EED-A20B-FD97B1E7C38D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{973D79F0-819E-411B-A87B-CB15FEF885FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973D79F0-819E-411B-A87B-CB15FEF885FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973D79F0-819E-411B-A87B-CB15FEF885FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973D79F0-819E-411B-A87B-CB15FEF885FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4CAC161-1D1E-4EED-A20B-FD97B1E7C38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4CAC161-1D1E-4EED-A20B-FD97B1E7C38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4CAC161-1D1E-4EED-A20B-FD97B1E7C38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4CAC161-1D1E-4EED-A20B-FD97B1E7C38D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8A71E28-4EE1-4DE3-9EFD-8CD551AD3C9A}
+	EndGlobalSection
+EndGlobal
