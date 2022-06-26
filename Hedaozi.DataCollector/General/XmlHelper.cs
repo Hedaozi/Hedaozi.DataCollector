@@ -7,10 +7,10 @@ namespace Hedaozi.DataCollector.General
 {
     internal static class XmlHelper
     {
-        public static XmlDocument LoadXml(Uri path)
+        public static XmlDocument LoadXml(string path)
         {
             XmlDocument document = new XmlDocument();
-            document.Load(path.ToString());
+            document.Load(path);
             return document;
         }
     }

@@ -5,8 +5,106 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hedaozi.DataCollector.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="900" MinHeight="480" MinWidth="720"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" MouseDown="DragWindow" 
+        ResizeMode="CanResizeWithGrip" SizeChanged="Window_SizeChanged"
+        Deactivated="Window_Deactivated" Activated="Window_Activated">
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="WindowBackground" Background="#FFF3F3F3" BorderThickness="0.5" BorderBrush="Gray" CornerRadius="8" Grid.RowSpan="2">
+            <Grid>
+                <Image x:Name="Wallpaper" Opacity="0.08" Stretch="UniformToFill">
+                    <Image.Effect>
+                        <BlurEffect Radius="1000" KernelType="Gaussian" RenderingBias="Quality"/>
+                    </Image.Effect>
+                </Image>
+                <Border x:Name="ColorMask" Background="#FFF3F3F3" CornerRadius="8"/>
+            </Grid>
+        </Border>
+        <Border x:Name="NavigationMask" Background="#FFF3F3F3" BorderThickness="0.5,0.5,0,0" BorderBrush="Gray" Visibility="Collapsed" CornerRadius="8,0,0,0" Width="300" HorizontalAlignment="Left"/>
+
+        <Grid x:Name="TitleBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" x:Name="TitleBarLeftButtons">
+                <Button x:Name="FrameGoBackButton" Content="&#xE72B;" Click="FrameGoBack" IsEnabled="{Binding ElementName=Frame,Path=CanGoBack}" FontSize="12" Template="{DynamicResource TitleBarLeftButton}" Margin="5,0,0,0"/>
+                <Button x:Name="ShowNavigationButton" Content="&#xE700;" Click="ShowNavigation" FontSize="14" Template="{DynamicResource TitleBarLeftButton}" Margin="0,0,5,0"/>
+            </StackPanel>
+
+            <Grid x:Name="TitleBarBlank" Grid.Column="1">
+                <TextBlock Text="HEDAOZI 数据采集器" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,20,0"/>
+            </Grid>
+
+            <Grid x:Name="HeaderRightButtons" Grid.Column="2" Height="33" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="45"/>
+                    <ColumnDefinition Width="45"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="MinimizeButton"  Content="&#xE921;" Click="MinimizeWindow" Template="{DynamicResource HeaderRightButton}"/>
+                <Button x:Name="MaximizeButton" Content="&#xE922;" Grid.Column="1" Click="MaximizeWindow" Template="{DynamicResource HeaderRightButton}"/>
+                <Button x:Name="NormalizeButton" Content="&#xE923;" Grid.Column="1" Click="NormalizeWindow" Visibility="Hidden" Template="{DynamicResource HeaderRightButton}"/>
+                <Button x:Name="CloseButton" Content="&#xE8BB;" Grid.Column="2" Click="CloseWindow" Template="{DynamicResource HeaderCloseButton}"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Border x:Name="ContentPanel" MaxWidth="1050" CornerRadius="0,0,8,0" HorizontalAlignment="Left">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,0,0,1">
+                    <Frame x:Name="Frame" Source="Pages/Home.xaml" NavigationUIVisibility="Hidden" Grid.Column="1" Margin="24,0"/>
+                </ScrollViewer>
+            </Border>
+            <Border x:Name="NavigationPanel" Width="300" HorizontalAlignment="Left" CornerRadius="8" BorderBrush="Gray" BorderThickness="0">
+                <StackPanel Margin="20,0">
+                    <RadioButton x:Name="NavigateToHome" IsChecked="True" GroupName="Navigation" Tag="Home" Checked="NavigateTo" Style="{StaticResource NavigationRadioButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE80F;" Style="{StaticResource NavigationIcon}"/>
+                            <TextBlock Text="所有采集器"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <Rectangle Stroke="#FFC9C9C9" StrokeThickness="0.5" Margin="0,4,0,0"/>
+                    <RadioButton x:Name="NavigateToMapAPI" GroupName="Navigation" Tag="MapAPI" Checked="NavigateTo" Style="{StaticResource NavigationRadioButton}" Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE707;" Style="{StaticResource NavigationIcon}"/>
+                            <TextBlock Text="地图API"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="NavigateToSpecialTopic" GroupName="Navigation" Tag="SpecialTopic" Checked="NavigateTo" Style="{StaticResource NavigationRadioButton}" Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE8A9;" Style="{StaticResource NavigationIcon}"/>
+                            <TextBlock Text="专题数据"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="NavigateToSocialMedia" GroupName="Navigation" Tag="SocialMedia" Checked="NavigateTo" Style="{StaticResource NavigationRadioButton}" Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE902;" Style="{StaticResource NavigationIcon}"/>
+                            <TextBlock Text="社交媒体"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <Rectangle Stroke="#FFC9C9C9" StrokeThickness="0.5" Margin="0,4,0,0"/>
+                    <RadioButton x:Name="NavigateToSettings" GroupName="Navigation" Style="{StaticResource NavigationRadioButton}" Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE713;" Style="{StaticResource NavigationIcon}"/>
+                            <TextBlock Text="设置"/>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton x:Name="NavigateToAbout" GroupName="Navigation" Style="{StaticResource NavigationRadioButton}" Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE82F;" Style="{StaticResource NavigationIcon}"/>
+                            <TextBlock Text="关于"/>
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
