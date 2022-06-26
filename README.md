@@ -2,6 +2,6 @@
 
 ## WPF Preview
 
-[](ReadMe/WPF.HOME.png)
+![](ReadMe/WPF.HOME.png)
 
-[](ReadMe/WPF.WEIBO.png)
+![](ReadMe/WPF.WEIBO.png)
